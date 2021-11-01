@@ -1,26 +1,32 @@
-# Maintainer: Felix Yan <felixonmars@archlinux.org>
+# Maintainer: zyxxcwmj <zyxxcwmj@gmail.com>
 
-pkgname=cutefish-statusbar
-pkgver=0.4
+pkgname=cutefish-statusbar-git
+pkgver=0.5.r3.g10a2fbb
 pkgrel=1
 pkgdesc="Top status bar of CutefishOS"
 arch=('x86_64')
 url="https://github.com/cutefishos/statusbar"
 license=('GPL')
-groups=('cutefish')
-depends=('fishui' 'libcutefish' 'libdbusmenu-qt5' 'qt5-svg')
+groups=('cutefish-git')
+depends=('fishui-git' 'libcutefish-git' 'libdbusmenu-qt5' 'qt5-svg')
 makedepends=('extra-cmake-modules' 'ninja' 'qt5-tools')
-source=("https://github.com/cutefishos/statusbar/archive/$pkgver/$pkgname-$pkgver.tar.gz")
-sha512sums=('6e2786808ca003fc3bc06ca52bcfb29a8c46a590afbde99c85ecf70a79c47f32bd998598e18fee656e025a1710082fb2cb5e9d135b8c0f7821c2afc162757389')
+provides=("cutefish-statusbar")
+conflicts=("cutefish-statusbar")
+source=("git+$url.git")
+sha512sums=('SKIP')
+
+pkgver() {
+  cd statusbar
+  git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
+}
 
 build() {
-  cd statusbar-$pkgver
-
+  cd statusbar
   cmake -DCMAKE_INSTALL_PREFIX=/usr .
   make
 }
 
 package() {
-  cd statusbar-$pkgver
+  cd statusbar
   make DESTDIR="$pkgdir" install
 }
