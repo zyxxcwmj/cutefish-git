@@ -1,26 +1,32 @@
-# Maintainer: Felix Yan <felixonmars@archlinux.org>
+# Maintainer: zyxxcwmj <zyxxcwmj@gmail.com>
 
-pkgname=cutefish-core
-pkgver=0.4
-pkgrel=2
+pkgname=cutefish-core-git
+pkgver=0.5.r10.gd8d2673
+pkgrel=1
 pkgdesc="System components and backend of CutefishOS"
 arch=('x86_64')
 url="https://github.com/cutefishos/core"
 license=('GPL')
-groups=('cutefish')
-depends=('fishui' 'libcutefish' 'libpulse' 'libxcursor' 'libxtst' 'polkit-qt5' 'xf86-input-libinput')
-makedepends=('extra-cmake-modules' 'ninja' 'qt5-tools')
-source=("https://github.com/cutefishos/core/archive/$pkgver/$pkgname-$pkgver.tar.gz")
-sha512sums=('60259469fb1c697ee46c17508ebc508dd40e24d4772a58c52e8cb9a2ccf6debed9dce13296ea3d6f51d612cfc980f46717424216db051d43611a148912bee709')
+groups=('cutefish-git')
+depends=('fishui-git' 'libcutefish-git' 'libpulse' 'libxcursor' 'libxtst' 'polkit-qt5' 'xf86-input-libinput')
+makedepends=('extra-cmake-modules' 'ninja' 'qt5-tools' 'xorg-server-devel' 'xf86-input-synaptics')
+provides=("cutefish-core")
+conflicts=("cutefish-core")
+source=("git+$url.git")
+sha512sums=('SKIP')
+
+pkgver() {
+  cd core
+  git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
+}
 
 build() {
-  cd core-$pkgver
-
+  cd core
   cmake -DCMAKE_INSTALL_PREFIX=/usr .
   make
 }
 
 package() {
-  cd core-$pkgver
+  cd core
   make DESTDIR="$pkgdir" install
 }

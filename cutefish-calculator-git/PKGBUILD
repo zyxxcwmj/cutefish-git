@@ -1,26 +1,32 @@
-# Maintainer: Felix Yan <felixonmars@archlinux.org>
+# Maintainer: zyxxcwmj <zyxxcwmj@gmail.com>
 
-pkgname=cutefish-calculator
-pkgver=0.4
-pkgrel=2
+pkgname=cutefish-calculator-git
+pkgver=0.4.r5.g79e6f1a
+pkgrel=1
 pkgdesc="CutefishOS Calculator"
 arch=('x86_64')
 url="https://github.com/cutefishos/calculator"
 license=('GPL')
-groups=('cutefish')
-depends=('fishui')
+groups=('cutefish-git')
+depends=('fishui-git')
 makedepends=('extra-cmake-modules' 'ninja' 'qt5-tools')
-source=("https://github.com/cutefishos/calculator/archive/$pkgver/$pkgname-$pkgver.tar.gz")
-sha512sums=('2c9bf5b7cf749066a87440c101658b33e4cc99f4510f0efd44a91ba0cd25a1c39414d3c8f4a4dbfa1204d4856a195f16e746985463950b93f87790fece74a0ec')
+provides=("cutefish-calculator")
+conflicts=("cutefish-calculator")
+source=("git+$url.git")
+sha512sums=('SKIP')
+
+pkgver() {
+  cd calculator
+  git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
+}
 
 build() {
-  cd calculator-$pkgver
-
+  cd calculator
   cmake -DCMAKE_INSTALL_PREFIX=/usr .
   make
 }
 
 package() {
-  cd calculator-$pkgver
+  cd calculator
   make DESTDIR="$pkgdir" install
 }

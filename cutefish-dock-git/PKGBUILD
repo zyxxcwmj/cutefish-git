@@ -1,26 +1,33 @@
-# Maintainer: Felix Yan <felixonmars@archlinux.org>
+# Maintainer: zyxxcwmj <zyxxcwmj@gmail.com>
 
-pkgname=cutefish-dock
-pkgver=0.4
-pkgrel=2
+pkgname=cutefish-dock-git
+pkgver=0.5.r4.g7cfdfe0
+pkgrel=1
 pkgdesc="CutefishOS application dock"
 arch=('x86_64')
 url="https://github.com/cutefishos/dock"
 license=('GPL')
-groups=('cutefish')
-depends=('fishui' 'qt5-svg')
+groups=('cutefish-git')
+depends=('fishui-git' 'qt5-svg')
 makedepends=('extra-cmake-modules' 'ninja' 'qt5-tools')
-source=("https://github.com/cutefishos/dock/archive/$pkgver/$pkgname-$pkgver.tar.gz")
-sha512sums=('3075014efa67cc42efd8a546a8dd5a2f4b210ab4c0dbf9effadb1650e5403b55dc816a76983e33048e56addfe5de2d93fee52622a306ad3ba09f7bda2701265d')
+provides=("cutefish-dock")
+conflicts=("cutefish-dock")
+source=("git+$url.git" "launchpad.svg")
+sha512sums=('SKIP' 'SKIP')
+
+pkgver() {
+  cd dock
+  git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
+}
 
 build() {
-  cd dock-$pkgver
-
+  cp launchpad.svg dock/images/launcher.svg
+  cd dock
   cmake -DCMAKE_INSTALL_PREFIX=/usr .
   make
 }
 
 package() {
-  cd dock-$pkgver
+  cd dock
   make DESTDIR="$pkgdir" install
 }

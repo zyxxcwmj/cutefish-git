@@ -1,26 +1,32 @@
-# Maintainer: Felix Yan <felixonmars@archlinux.org>
+# Maintainer: zyxxcwmj <zyxxcwmj@gmail.com>
 
-pkgname=cutefish-filemanager
-pkgver=0.4
-pkgrel=2
+pkgname=cutefish-filemanager-git
+pkgver=0.5.r9.gd4783df
+pkgrel=1
 pkgdesc="Cutefish File Manager, simple to use, beautiful, and retain the classic PC interactive design"
 arch=('x86_64')
 url="https://github.com/cutefishos/filemanager"
 license=('GPL')
-groups=('cutefish')
-depends=('fishui' 'kio' 'solid')
+groups=('cutefish-git')
+depends=('fishui-git' 'kio' 'solid')
 makedepends=('extra-cmake-modules' 'qt5-tools')
-source=("https://github.com/cutefishos/filemanager/archive/$pkgver/$pkgname-$pkgver.tar.gz")
-sha512sums=('82599dd5575c05a2d9b01a46634e811a6b199e4252797829891aa89c369318b23e8250974130685ea90e424cf5a7c1be59fd784935d5742a40c5f2856ac0a8c5')
+provides=("cutefish-filemanager")
+conflicts=("cutefish-filemanager")
+source=("git+$url.git")
+sha512sums=('SKIP')
+
+pkgver() {
+  cd filemanager
+  git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
+}
 
 build() {
-  cd filemanager-$pkgver
-
+  cd filemanager
   cmake -DCMAKE_INSTALL_PREFIX=/usr .
   make
 }
 
 package() {
-  cd filemanager-$pkgver
+  cd filemanager
   make DESTDIR="$pkgdir" install
 }
