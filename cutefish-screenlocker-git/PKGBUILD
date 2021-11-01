@@ -1,26 +1,32 @@
-# Maintainer: Felix Yan <felixonmars@archlinux.org>
+# Maintainer: zyxxcwmj <zyxxcwmj@gmail.com>
 
-pkgname=cutefish-screenlocker
-pkgver=0.4
+pkgname=cutefish-screenlocker-git
+pkgver=0.5.r0.gc27ce2e
 pkgrel=1
 pkgdesc="CutefishOS system screen locker"
 arch=('x86_64')
 url="https://github.com/cutefishos/screenlocker"
 license=('GPL')
-groups=('cutefish')
-depends=('fishui' 'libcutefish')
+groups=('cutefish-git')
+depends=('fishui-git' 'libcutefish-git')
 makedepends=('extra-cmake-modules' 'qt5-tools')
-source=("https://github.com/cutefishos/screenlocker/archive/$pkgver/$pkgname-$pkgver.tar.gz")
-sha512sums=('a1504a073f7d6e1e279710a2639d74765663b224f8e76f2c8e2f3e0137695bcd25b29d07c8d890932047d982c7157529afe31adad654b6149406587069eec5b8')
+provides=("cutefish-screenlocker")
+conflicts=("cutefish-screenlocker")
+source=("git+$url.git")
+sha512sums=('SKIP')
+
+pkgver() {
+  cd screenlocker
+  git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
+}
 
 build() {
-  cd screenlocker-$pkgver
-
+  cd screenlocker
   cmake -DCMAKE_INSTALL_PREFIX=/usr .
   make
 }
 
 package() {
-  cd screenlocker-$pkgver
+  cd screenlocker
   make DESTDIR="$pkgdir" install
 }
