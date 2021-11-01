@@ -1,26 +1,32 @@
-# Maintainer: Felix Yan <felixonmars@archlinux.org>
+# Maintainer: zyxxcwmj <zyxxcwmj@gmail.com>
 
-pkgname=cutefish-terminal
-pkgver=0.4
-pkgrel=2
+pkgname=cutefish-terminal-git
+pkgver=0.5.r13.g100bac1
+pkgrel=1
 pkgdesc="A terminal emulator for Cutefish"
 arch=('x86_64')
 url="https://github.com/cutefishos/terminal"
 license=('GPL')
-groups=('cutefish')
-depends=('fishui' 'qt5-svg')
+groups=('cutefish-git')
+depends=('fishui-git' 'qt5-svg')
 makedepends=('extra-cmake-modules' 'qt5-tools')
-source=("https://github.com/cutefishos/terminal/archive/$pkgver/$pkgname-$pkgver.tar.gz")
-sha512sums=('900d9419a63e91dc7841e7c39aa8acdd67f9bd6215bd0b4751c1ad5b025bf219eae90e041fd7b02fa4e3cb9ccd8093cee1e442db57479161fd890fd7fe28cc22')
+provides=("cutefish-terminal")
+conflicts=("cutefish-terminal")
+source=("git+$url.git")
+sha512sums=('SKIP')
+
+pkgver() {
+  cd terminal
+  git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
+}
 
 build() {
-  cd terminal-$pkgver
-
+  cd terminal
   cmake -DCMAKE_INSTALL_PREFIX=/usr .
   make
 }
 
 package() {
-  cd terminal-$pkgver
+  cd terminal
   make DESTDIR="$pkgdir" install
 }
