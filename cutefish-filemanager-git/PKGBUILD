@@ -1,7 +1,7 @@
 # Maintainer: zyxxcwmj <zyxxcwmj@gmail.com>
 
 pkgname=cutefish-filemanager-git
-pkgver=0.5.r9.gd4783df
+pkgver=0.5.r12.g9cc0c4b
 pkgrel=1
 pkgdesc="Cutefish File Manager, simple to use, beautiful, and retain the classic PC interactive design"
 arch=('x86_64')

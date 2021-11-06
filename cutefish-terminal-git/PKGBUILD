@@ -1,7 +1,7 @@
 # Maintainer: zyxxcwmj <zyxxcwmj@gmail.com>
 
 pkgname=cutefish-terminal-git
-pkgver=0.5.r13.g100bac1
+pkgver=0.5.r18.ge832cdc
 pkgrel=1
 pkgdesc="A terminal emulator for Cutefish"
 arch=('x86_64')
