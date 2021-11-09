@@ -1,7 +1,7 @@
 # Maintainer: zyxxcwmj <zyxxcwmj@gmail.com>
 
 pkgname=cutefish-dock-git
-pkgver=0.5.r5.g668e365
+pkgver=0.5.r6.g27ffb0f
 pkgrel=1
 pkgdesc="CutefishOS application dock"
 arch=('x86_64')
