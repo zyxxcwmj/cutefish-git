@@ -1,7 +1,7 @@
 # Maintainer: zyxxcwmj <zyxxcwmj@gmail.com>
 
 pkgname=cutefish-launcher-git
-pkgver=0.5.r3.g689e3c5
+pkgver=0.5.r4.g7c3bf31
 pkgrel=1
 pkgdesc="CutefishOS's full-screen application launcher"
 arch=('x86_64')
