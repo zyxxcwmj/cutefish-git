@@ -1,7 +1,7 @@
 # Maintainer: zyxxcwmj <zyxxcwmj@gmail.com>
 
 pkgname=cutefish-settings-git
-pkgver=0.5.r28.g8e27723
+pkgver=0.5.r31.g589364b
 pkgrel=1
 pkgdesc="System Settings application for Cutefish Desktop"
 arch=('x86_64')
