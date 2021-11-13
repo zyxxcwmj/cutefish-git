@@ -1,7 +1,7 @@
 # Maintainer: zyxxcwmj <zyxxcwmj@gmail.com>
 
 pkgname=cutefish-core-git
-pkgver=0.5.r13.g617b493
+pkgver=0.5.r14.g04697c1
 pkgrel=1
 pkgdesc="System components and backend of CutefishOS"
 arch=('x86_64')
