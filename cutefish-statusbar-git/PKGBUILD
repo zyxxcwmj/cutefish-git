@@ -1,7 +1,7 @@
 # Maintainer: zyxxcwmj <zyxxcwmj@gmail.com>
 
 pkgname=cutefish-statusbar-git
-pkgver=0.5.r6.g761ea19
+pkgver=0.5.r10.ga6f9696
 pkgrel=1
 pkgdesc="Top status bar of CutefishOS"
 arch=('x86_64')
