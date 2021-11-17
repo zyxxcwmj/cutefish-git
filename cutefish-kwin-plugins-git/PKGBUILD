@@ -1,7 +1,7 @@
 # Maintainer: zyxxcwmj <zyxxcwmj@gmail.com>
 
 pkgname=cutefish-kwin-plugins-git
-pkgver=0.5.r1.gfd5f3e8
+pkgver=0.5.r2.gc2ad6de
 pkgrel=1
 pkgdesc="CutefishOS KWin Plugins"
 arch=('x86_64')
